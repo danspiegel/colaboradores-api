@@ -1,6 +1,6 @@
 ## Arquivo Leia-Me
 
-## Repositório (BitBucket)
+## Repositório (GitHub)
 
 ## URLs dos Serviços
 

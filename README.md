@@ -29,5 +29,5 @@ Listar Colaboradores Agrupados Por Setor: localhost:8080/setor/listarColaborador
 
 ## Script SQL de Criação do Banco e Insert de Setores
 
-- https://bitbucket.org/danielspiegel/javaplenodanielspiegel/src/master/JavaPlenoDanielSpiegel/src/main/resources/sql/
+- https://github.com/danspiegel/colaboradores-api/blob/master/src/main/resources/sql/script.sql
 

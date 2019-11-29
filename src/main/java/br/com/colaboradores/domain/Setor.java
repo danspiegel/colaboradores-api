@@ -1,4 +1,4 @@
-package br.com.colaboradores.models;
+package br.com.colaboradores.domain;
 
 import java.io.Serializable;
 import java.util.Set;

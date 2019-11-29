@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ResourceExceptionHandle {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<DadosErro> objectNotFound(ObjectNotFoundException e) {
-		DadosErro erro = new DadosErro(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e) {
+		StandardError erro = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<DadosErro> methodArgumentNotValid(MethodArgumentNotValidException e) {
-		ValidacaoErros erro = new ValidacaoErros(HttpStatus.BAD_REQUEST.value(), "Erro durante a validação", System.currentTimeMillis());
+	public ResponseEntity<StandardError> methodArgumentNotValid(MethodArgumentNotValidException e) {
+		ValidationError erro = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro durante a validação", System.currentTimeMillis());
 		
 		for (FieldError err: e.getBindingResult().getFieldErrors()) {
 			erro.adicionarErros(err.getField(), err.getDefaultMessage());
@@ -32,8 +32,8 @@ public class ResourceExceptionHandle {
 	}
 	
 	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<DadosErro> business(BusinessException e) {
-		DadosErro erro = new DadosErro(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+	public ResponseEntity<StandardError> business(BusinessException e) {
+		StandardError erro = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
 	

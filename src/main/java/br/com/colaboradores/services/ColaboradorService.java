@@ -1,7 +1,7 @@
-package br.com.colaboradores.service;
+package br.com.colaboradores.services;
 
+import br.com.colaboradores.domain.Colaborador;
 import br.com.colaboradores.dto.ColaboradorDTO;
-import br.com.colaboradores.models.Colaborador;
 
 /**
  * Interface de serviço de colaboradores

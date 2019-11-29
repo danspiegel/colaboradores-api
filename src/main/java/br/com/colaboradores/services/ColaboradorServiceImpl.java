@@ -1,4 +1,4 @@
-package br.com.colaboradores.service;
+package br.com.colaboradores.services;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.colaboradores.domain.Colaborador;
+import br.com.colaboradores.domain.Setor;
 import br.com.colaboradores.dto.ColaboradorDTO;
 import br.com.colaboradores.exceptions.BusinessException;
 import br.com.colaboradores.exceptions.ObjectNotFoundException;
-import br.com.colaboradores.models.Colaborador;
-import br.com.colaboradores.models.Setor;
-import br.com.colaboradores.repositories.ColaboradorRepository;
+import br.com.colaboradores.repositories.ColaboradorResource;
 import br.com.colaboradores.utils.Utils;
 
 /**
@@ -23,7 +23,7 @@ import br.com.colaboradores.utils.Utils;
 public class ColaboradorServiceImpl implements ColaboradorService {
 
 	@Autowired
-	private ColaboradorRepository colaboradorRepository;
+	private ColaboradorResource colaboradorRepository;
 	
 	@Autowired
 	private SetorService setorService;
@@ -60,7 +60,7 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 			throw new BusinessException("O setor é obrigatório."); 
 		}
 		
-		Setor setor = this.setorService.buscarSetorPorId(colaborador.getSetor().getId());
+		Setor setor = this.setorService.buscarPorId(colaborador.getSetor().getId().toString());
 		List<Setor> setores = this.setorService.listarSetores();
 		
 		if (colaborador.getIdade() < 18) {

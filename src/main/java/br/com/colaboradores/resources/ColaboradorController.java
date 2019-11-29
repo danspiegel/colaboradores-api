@@ -1,4 +1,4 @@
-package br.com.colaboradores.controllers;
+package br.com.colaboradores.resources;
 
 import javax.validation.Valid;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.colaboradores.domain.Colaborador;
 import br.com.colaboradores.dto.ColaboradorDTO;
-import br.com.colaboradores.models.Colaborador;
-import br.com.colaboradores.service.ColaboradorService;
+import br.com.colaboradores.services.ColaboradorService;
 
 /**
  * Classe de controller que representa os serviços de colaboradores.

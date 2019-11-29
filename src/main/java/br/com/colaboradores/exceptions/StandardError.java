@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Classe contendo o status de erro da requisição.
  *
  */
-public class DadosErro implements Serializable {
+public class StandardError implements Serializable {
 
 	private static final long serialVersionUID = 1608812318310390899L;
 	
@@ -16,7 +16,7 @@ public class DadosErro implements Serializable {
 	private String mensagem;
 	private Long timeStamp;
 	
-	public DadosErro(Integer status, String mensagem, Long timeStamp) {
+	public StandardError(Integer status, String mensagem, Long timeStamp) {
 		super();
 		this.status = status;
 		this.mensagem = mensagem;

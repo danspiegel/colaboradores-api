@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Classe contendo informações dos erros de validação dos campos.
  *
  */
-public class ErroCampos implements Serializable {
+public class FieldMessage implements Serializable {
 
 	private static final long serialVersionUID = -9108691767199807594L;
 	
@@ -15,11 +15,11 @@ public class ErroCampos implements Serializable {
 	private String campo;
 	private String mensagem;
 	
-	public ErroCampos() {
+	public FieldMessage() {
 		
 	}
 	
-	public ErroCampos(String campo, String mensagem) {
+	public FieldMessage(String campo, String mensagem) {
 		super();
 		this.campo = campo;
 		this.mensagem = mensagem;

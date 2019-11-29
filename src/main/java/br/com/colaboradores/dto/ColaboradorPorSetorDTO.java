@@ -2,6 +2,8 @@ package br.com.colaboradores.dto;
 
 import java.io.Serializable;
 
+import br.com.colaboradores.domain.Colaborador;
+
 /**
  * Classe de negócio de colaborador contendo somente os campos para serem retornados junto ao setor
  *
@@ -14,6 +16,15 @@ public class ColaboradorPorSetorDTO implements Serializable {
 	
 	private String nome;
 	private String email;
+	
+	public ColaboradorPorSetorDTO() {
+		
+	}
+	
+	public ColaboradorPorSetorDTO(Colaborador colaborador) {
+		this.nome = colaborador.getNome();
+		this.email = colaborador.getEmail();
+	}
 	
 	//--> Getters e Setters
 	

@@ -2,7 +2,7 @@ package br.com.colaboradores.dto;
 
 import java.io.Serializable;
 
-import br.com.colaboradores.models.Colaborador;
+import br.com.colaboradores.domain.Colaborador;
 import br.com.colaboradores.utils.Utils;
 
 /**

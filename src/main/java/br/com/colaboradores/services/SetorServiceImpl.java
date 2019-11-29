@@ -1,4 +1,4 @@
-package br.com.colaboradores.service;
+package br.com.colaboradores.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.colaboradores.domain.Colaborador;
+import br.com.colaboradores.domain.Setor;
+import br.com.colaboradores.dto.ColaboradorDTO;
 import br.com.colaboradores.dto.ColaboradorPorSetorDTO;
-import br.com.colaboradores.dto.SetorColaboradorDTO;
+import br.com.colaboradores.dto.SetorDTO;
 import br.com.colaboradores.exceptions.ObjectNotFoundException;
-import br.com.colaboradores.models.Setor;
-import br.com.colaboradores.repositories.SetorRepository;
+import br.com.colaboradores.repositories.SetorResource;
 
 /**
  * Classe de serviço de setores
@@ -21,7 +23,7 @@ import br.com.colaboradores.repositories.SetorRepository;
 public class SetorServiceImpl implements SetorService {
 
 	@Autowired
-	private SetorRepository setorRepository;
+	private SetorResource setorRepository;
 	
 	/**
 	 * {@inheritDoc}
@@ -33,7 +35,7 @@ public class SetorServiceImpl implements SetorService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SetorColaboradorDTO> listarColaboradoresPorSetor() {
+	public List<SetorDTO> listarColaboradoresPorSetor() {
 		return this.converteListaColaboradoresPorSetor(this.listarSetores());
 	}
 	
@@ -42,24 +44,19 @@ public class SetorServiceImpl implements SetorService {
 	 * @param Lista de colaboradores por setor na forma de entidade do banco
 	 * @return Lista de colaboradores por setor que será serializada
 	 */
-	public List<SetorColaboradorDTO> converteListaColaboradoresPorSetor(List<Setor> setores) {
-		List<SetorColaboradorDTO> listaSetores = new ArrayList<SetorColaboradorDTO>();
+	public List<SetorDTO> converteListaColaboradoresPorSetor(List<Setor> setores) {
+		List<SetorDTO> listaSetores = new ArrayList<SetorDTO>();
 		
 		setores.forEach(s -> {
 			List<ColaboradorPorSetorDTO> listaColaboradores = new ArrayList<ColaboradorPorSetorDTO>();
-			SetorColaboradorDTO setorColaborador = new SetorColaboradorDTO();
-			setorColaborador.setId(s.getId());
-			setorColaborador.setDescricao(s.getDescricao());
+			SetorDTO setor = new SetorDTO(s);
 			
 			s.getColaboradores().forEach(c -> {
-				ColaboradorPorSetorDTO colaboradoresPorSetor = new ColaboradorPorSetorDTO();
-				colaboradoresPorSetor.setNome(c.getNome());
-				colaboradoresPorSetor.setEmail(c.getEmail());
-				listaColaboradores.add(colaboradoresPorSetor);
+				listaColaboradores.add(new ColaboradorPorSetorDTO(c));
 			});
 			
-			setorColaborador.setColaboradores(listaColaboradores);
-			listaSetores.add(setorColaborador);
+			setor.setColaboradores(listaColaboradores);
+			listaSetores.add(setor);
 		});
 		
 		return listaSetores;
@@ -68,9 +65,32 @@ public class SetorServiceImpl implements SetorService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public Setor buscarSetorPorId(Long id) {
-		Optional<Setor> setor = this.setorRepository.findById(id);
+	public Setor buscarPorId(String id) {
+		Optional<Setor> setor = this.setorRepository.findById(Long.valueOf(id));
 		return setor.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado."));
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Setor inserirSetor(Setor setor) {
+		return this.setorRepository.save(setor);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void removerSetor(String id) {
+		Setor setor = this.buscarPorId(id);
+		this.setorRepository.delete(setor);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public SetorDTO converteSetor(Setor setor) {
+		SetorDTO dto = new SetorDTO(setor);	
+		return dto;
+	}	
 	
 }

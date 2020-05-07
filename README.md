@@ -21,9 +21,9 @@ Parâmetro Exemplo:
 
 Obs.: Somente o CPF, nome, idade, telefone e e-mail são obrigatórios.
 
-Buscar Colaborador Por CPF: localhost:8080/colaborador/buscarColaboradorPorCpf/{cpf}
+Buscar Colaborador Por Id: localhost:8080/colaborador/buscarColaboradorPorId/{id}
 
-Remover Colaborador Por CPF: localhost:8080/colaborador/removerColaborador/{cpf}
+Remover Colaborador Por Id: localhost:8080/colaborador/removerColaborador/{id}
 
 Listar Colaboradores Agrupados Por Setor: localhost:8080/setor/listarColaboradoresPorSetor
 
